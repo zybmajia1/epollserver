@@ -72,16 +72,18 @@ int main()
 	//epollctl register event
 	epoll_event ev;
 	ev.data.fd = listenfd;
-	ev.events = EPOLLIN|EPOLLLET;
-	epoll_ctl(epfd, EPOLL_CTL_ADD, &ev);
+	ev.events = EPOLLIN|EPOLLET;
+	epoll_ctl(epfd, EPOLL_CTL_ADD, listenfd, &ev);
 	
 	int maxi = 0;
 	int sumfds = 0;
-	epoll_event events[20] = {0}
+	epoll_event events[20] = {0};
 	for(;;)
 	{
-		sumfds = epoll_wait(epfd, &events, 20, -1);
-		
+		sumfds = epoll_wait(epfd, events, 20, -1);
+		for(int i=0; i<sumfds; i++)
+		{
+		}
 	}
 	
 	return 0;
